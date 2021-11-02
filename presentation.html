@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+    @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+      name: inverse
+      layout: true
+      class: center, middle, inverse
+      
+---
+# Being Good at command-line
+---
+
+.left-column[
+  ## Session format
+]
+.right-column[
+
+- We will follow simple question( or problem) and its answer (or solution)
+
+- While this might sound like particular use-case but we can eventually expand solutions for many other use-cases
+
+.footnote[.red[*] Feel free to interrupt any time you have better suggestion/idea ]
+]
+
+---
+### How do I monitor resources on server?
+
+* RAM: `free`
+* Filesystem: `ls/du`
+* Network: `netstat, lsof `
+* CPU: `iostat, top`
+* Processes: `ps`
+* Everything: `htop`
+* Disk space usage: `du ( -a, -h, -s (summarize)`
+
+---
+
+### Measuring server response time
+
+* Using application server logs:
+* Using nginx logs: 
+```
+awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c
+```
+* When you don’t have access to server: 
+```
+curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
+```
+---
+
+### Executing commands based on output of other command
+
+Let's say you have certain zips files or logs files in directory. and you want to remove/grep/extract those files based on certain conditions
+
+#### Extracting zips files whos name starts with `extractMe`
+```
+find .  -name "extractMe*.zip" -exec unzip {} \; 
+```
+or Using xargs
+```
+\ls extractMe*.zip | xargs unzip 
+# Notice \
+```
+
+#### creating backup of order_export*.csv files
+```
+ls order_export*.csv | xargs -Ifile echo  file "bkp_file"
+```
+
+#### Finding duplicated files
+
+```
+find .  -type f -name '*' -not -path "./.git/*"   -print0 | xargs -0 md5sum | sort -k 1,1 | uniq --check-chars=32 --all-repeated=separate
+```
+---
+
+### Time
+
+#### date command recognises simple text
+
+```
+date -d '20 mins ago'
+date -d 'a week ago'
+date -d '+ 3 days'
+```
+
+#### Running command with timeout
+
+* If you wish you end command within `N` seconds if it doesn't succeed then `timeout` command allows you to do so
+`timeout 2 sleep 10`
+
+#### 
+---
+### Git
+
+#### Reviewing refactoring changes in a snap
+
+* [TODO Add technique mentioned here] https://gitlab.com/O1Dev/O1Server/-/merge_requests/7065#note_653530489
+* https://gitlab.com/O1Dev/O1Server/uploads/2b6531588c9e3745e761e1938035b254/image.png
+git config color.diff.oldMoved "red reverse", git config color.diff.newMoved "green reverse", git diff --cached --color-moved=plain
+
+#### Find piece of code which was once part of repo but not now
+```
+git rev-list --all | xargs git grep MDC | head
+```
+
+#### 
+---
+
+### Text processing
+
+#### All things grep
+
+* Grepping "Status: " and any 3 letters which comes after that  
+```
+grep -oP "Status: .{0,3}" logs/application.log
+```
+* [Add more problems involving following args]  grep: -F, -w, -i, -v, -l, -A,B,C equivalent for chars
+
+#### Awk one liners
+
+```
+seq 10 | awk '{sum+=$1}END {print sum}'
+seq 10 | awk '($1 % 2) == 1{sum+=$1}END {print sum}'
+seq 10 | awk '{sum+=$1}END {print sum/NR}' # AVG
+Seq 10 | awk "{print} /7/ {exit}"
+
+sed 's/unix/linux/' geekfile.txt
+```
+
+
+
+
+---
+
+
+### Dealing with long running commands/processes
+
+* `tmux` or `screen` (also called multiplexers) can be used to create multiple new shell sessions inside single ssh session  
+* Other advantage is session persistance. should be used when running long running command or if you have patchy internet connection
+* Use `Ctrl+z` to suspend process/command and then use `fg/bg` command to run same suspended process in background or foreground
+* `tmux` also have option `-CC` which is integration mode with iterm2
+* `tee` can be used to redirect output to file as well as stdout
+
+---
+
+
+### Keyboard shortcuts
+
+* Keybindings - (vim/emacs)
+* Alt + b, Alt + f - move forward/backward by word
+* Ctrl + a - move cursor to start of line
+* Ctrl + e - move cursor to end of line
+* Ctrl + w - delete one word
+* option + left arrow/right arrow - move one work left/right
+* Ctrl + u = delete leftwards until the beginning of line
+* Ctrl + k - kill to end of the line
+* Ctrl + l - clear the screen.
+
+---
+
+
+### Making life simpler and easier
+
+* [`jq`](https://github.com/stedolan/jq) - reading/parsing json
+* [`jo`](https://github.com/jpmens/jo) - creating json 
+* [`tig`](https://jonas.github.io/tig/) - command line git repo browser
+* [`diff-so-fancy`](https://github.com/so-fancy/diff-so-fancy) - Good-lookin' diffs
+
+```
+curl -sSL http://localhost:8081/metrics | jq .version
+jo id=543 name=Mohit
+```
+* Working with multiple branches ? Tired of `git stash/stash  pop ` ?  `git worktree` to the rescue
+
+---
+
+
+### Learning how to learn [This should be second last section]
+
+* Understand complex command args using explainshell.com
+* Learn to read manuals (man man)
+* Commands (Identify by which, type)
+
+---
+
+
+### QnA
+
+---
+
+
+### Resources
+
+* Awesome way to learn command args - https://explainshell.com/
+* https://github.com/jlevy/the-art-of-command-line
+* https://unix.stackexchange.com/questions/4023/aliases-vs-functions-vs-scripts 
+* https://github.com/learnbyexample/Command-line-text-processing
+* https://www.tldp.org/LDP/abs/html/abs-guide.html 
+* http://zsh.sourceforge.net/Guide/zshguide.html 
+* https://github.com/dylanaraps/pure-bash-bible 
+* https://news.ycombinator.com/item?id=14634964 
+* https://tldp.org/LDP/abs/html/sedawk.html 
+* https://www.tldp.org/LDP/abs/html/contributed-scripts.html
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
