@@ -9,11 +9,8 @@
 
 ### Measuring server response time
 
-* Using application server logs:
-* Using nginx logs: 
-```
-awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c
-```
+
+
 * When you don’t have access to server, using [curl timings](https://blog.cloudflare.com/a-question-of-timing/): 
 ```
 curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
@@ -22,7 +19,7 @@ curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET 
 ### Finding http errors and it's count
 
 ```
-awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c
+awk '{print $9}' /var/log/nginx/access.log |  head -n 1000 | sort | uniq -c | sort -rn
 ```
 
 ---
