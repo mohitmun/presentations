@@ -15,7 +15,7 @@
 * Everything: `htop`
 * Disk space usage: `du ( -a, -h, -s (summarize)`
 
-___
+---
 
 ### Measuring server response time
 
@@ -28,7 +28,7 @@ awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c
 ```
 curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
 ```
-___
+---
 
 ### Executing commands based on output of other command
 
@@ -54,7 +54,7 @@ ls order_export*.csv | xargs -Ifile echo  file "bkp_file"
 ```
 find .  -type f -name '*' -not -path "./.git/*"   -print0 | xargs -0 md5sum | sort -k 1,1 | uniq --check-chars=32 --all-repeated=separate
 ```
-___
+---
 
 ### Time
 
@@ -72,7 +72,7 @@ date -d '+ 3 days'
 `timeout 2 sleep 10`
 
 #### 
-___
+---
 ### Git
 
 #### Reviewing refactoring changes in a snap
@@ -87,7 +87,7 @@ git rev-list --all | xargs git grep MDC | head
 ```
 
 #### 
-___
+---
 
 ### Text processing
 
@@ -97,7 +97,22 @@ ___
 ```
 grep -oP "Status: .{0,3}" logs/application.log
 ```
-* [Add more problems involving following args]  grep: -F, -w, -i, -v, -l, -A,B,C equivalent for chars
+* Searching for multiple strings inside a file.
+```
+~$ cat requestIds
+801a3303-f25d-4bb9-afdf-48b59196f091
+53fa29f3-1e64-4f48-a234-3f7dba388897
+~$ zgrep -f requestIds logs/application-2021-11-01-1.log.gz
+```
+
+same thing above can be achieved using `-F`
+
+```
+zgrep -F $'53fa29f3-1e64-4f48-a234-3f7dba388897\n801a3303-f25d-4bb9-afdf-48b59196f091' logs/application-2021-11-01-1.log.gz
+```
+
+* Other grep options   
+`-w`: matches words, `-i`: ignore case, `-v`: invert match, `-l`: list only files, `-A,B,C`: context around matches
 
 #### Awk one liners
 
@@ -113,7 +128,7 @@ sed 's/unix/linux/' geekfile.txt
 
 
 
-___
+---
 
 
 ### Dealing with long running commands/processes
@@ -124,7 +139,7 @@ ___
 * `tmux` also have option `-CC` which is integration mode with iterm2
 * `tee` can be used to redirect output to file as well as stdout
 
-___
+---
 
 
 ### Keyboard shortcuts
@@ -139,7 +154,7 @@ ___
 * Ctrl + k - kill to end of the line
 * Ctrl + l - clear the screen.
 
-___
+---
 
 
 ### Making life simpler and easier
@@ -155,7 +170,7 @@ jo id=543 name=Mohit
 ```
 * Working with multiple branches ? Tired of `git stash/stash  pop ` ?  `git worktree` to the rescue
 
-___
+---
 
 
 ### Learning how to learn [This should be second last section]
@@ -164,12 +179,12 @@ ___
 * Learn to read manuals (man man)
 * Commands (Identify by which, type)
 
-___
+---
 
 
 ### QnA
 
-___
+---
 
 
 ### Resources
