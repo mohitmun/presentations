@@ -14,14 +14,14 @@
 
 
 * When you don’t have access to server, using [curl timings](https://blog.cloudflare.com/a-question-of-timing/): 
-```
-curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
+```shell
+$ curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
 ```
 
 ### Finding http errors and it's count
 
-```
-awk '{print $9}' /var/log/nginx/access.log |  head -n 1000 | sort | uniq -c | sort -rn
+```shell
+$ awk '{print $9}' /var/log/nginx/access.log |  head -n 1000 | sort | uniq -c | sort -rn
 ```
 
 ---
@@ -31,12 +31,12 @@ awk '{print $9}' /var/log/nginx/access.log |  head -n 1000 | sort | uniq -c | so
 Let's say you have certain zips files or logs files in directory. and you want to remove/grep/extract those files based on certain conditions
 
 #### Extracting zips files whos name starts with `extractMe`
-```
-find .  -name "extractMe*.zip" -exec unzip {} \; 
+```shell
+$ find .  -name "extractMe*.zip" -exec unzip {} \; 
 ```
 or Using xargs
-```
-\ls extractMe*.zip | xargs unzip 
+```shell
+$ \ls extractMe*.zip | xargs unzip 
 # Notice \
 ```
 
@@ -47,14 +47,15 @@ $ find /tmp/excels/ShippingManifests/ -type f -name '*.pdf' -mtime +1 -exec rm {
 ```
 
 #### creating backup of order_export*.csv files
-```
-ls order_export*.csv | xargs -Ifile echo  file "bkp_file"
+
+```shell
+$ ls order_export*.csv | xargs -Ifile echo  file "bkp_file"
 ```
 
 #### Finding duplicated files
 
-```
-find .  -type f -name '*' -not -path "./.git/*"   -print0 | xargs -0 md5sum | sort -k 1,1 | uniq --check-chars=32 --all-repeated=separate
+```shell
+$ find .  -type f -name '*' -not -path "./.git/*"   -print0 | xargs -0 md5sum | sort -k 1,1 | uniq --check-chars=32 --all-repeated=separate
 ```
 ---
 
@@ -62,10 +63,10 @@ find .  -type f -name '*' -not -path "./.git/*"   -print0 | xargs -0 md5sum | so
 
 #### date command recognises simple text
 
-```
-date -d '20 mins ago'
-date -d 'a week ago'
-date -d '+ 3 days'
+```shell
+$ date -d '20 mins ago'
+$ date -d 'a week ago'
+$ date -d '+ 3 days'
 ```
 
 #### Running command with timeout
@@ -91,8 +92,8 @@ $ git config color.diff.newMoved "green reverse"
 $ git diff --cached --color-moved=plain
 ```
 #### Find piece of code which was once part of repo but not now
-```
-git rev-list --all | xargs git grep MDC | head
+```shell
+$ git rev-list --all | xargs git grep MDC | head
 ```
 
 #### 
@@ -103,21 +104,21 @@ git rev-list --all | xargs git grep MDC | head
 #### All things grep
 
 * Grepping "Status: " and any 3 letters which comes after that  
-```
-grep -oP "Status: .{0,3}" logs/application.log
+```shell
+$ grep -oP "Status: .{0,3}" logs/application.log
 ```
 * Searching for multiple strings inside a file.
-```
-~$ cat requestIds
+```shell
+$ cat requestIds
 801a3303-f25d-4bb9-afdf-48b59196f091
 53fa29f3-1e64-4f48-a234-3f7dba388897
-~$ zgrep -f requestIds logs/application-2021-11-01-1.log.gz
+$ zgrep -f requestIds logs/application-2021-11-01-1.log.gz
 ```
 
 same thing above can be achieved using `-F`
 
-```
-zgrep -F $'53fa29f3-1e64-4f48-a234-3f7dba388897\n801a3303-f25d-4bb9-afdf-48b59196f091' logs/application-2021-11-01-1.log.gz
+```shell
+$ zgrep -F $'53fa29f3-1e64-4f48-a234-3f7dba388897\n801a3303-f25d-4bb9-afdf-48b59196f091' logs/application-2021-11-01-1.log.gz
 ```
 
 * Other grep options   
@@ -125,18 +126,18 @@ zgrep -F $'53fa29f3-1e64-4f48-a234-3f7dba388897\n801a3303-f25d-4bb9-afdf-48b5919
 
 #### Awk one liners
 
-```
-seq 10 | awk '{sum+=$1}END {print sum}'
-seq 10 | awk '($1 % 2) == 1{sum+=$1}END {print sum}'
-seq 10 | awk '{sum+=$1}END {print sum/NR}' # AVG
-Seq 10 | awk "{print} /7/ {exit}"
+```shell
+$ seq 10 | awk '{sum+=$1}END {print sum}'
+$ seq 10 | awk '($1 % 2) == 1{sum+=$1}END {print sum}'
+$ seq 10 | awk '{sum+=$1}END {print sum/NR}' # AVG
+$ Seq 10 | awk "{print} /7/ {exit}"
 
-sed 's/unix/linux/' geekfile.txt
+$ sed 's/unix/linux/' geekfile.txt
 ```
 
 ### Extract anything (and how to create bash functions)
 
-```
+```shell
 extract () {
   if [ -f $1 ]; then
     case $1 in
@@ -200,7 +201,7 @@ extract () {
 * [`tig`](https://jonas.github.io/tig/) - command line git repo browser
 * [`diff-so-fancy`](https://github.com/so-fancy/diff-so-fancy) - Good-lookin' diffs
 
-```
+```shell
 curl -sSL http://localhost:8081/metrics | jq .version
 jo id=543 name=Mohit
 ```
