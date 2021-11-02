@@ -81,12 +81,16 @@ date -d '+ 3 days'
 #### Reviewing refactoring changes in a snap
 
 * Highlight moved code
-![image](https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png)
 
-![image](https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png)
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="120" height="120">
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="120" height="120">
 
-git config color.diff.oldMoved "red reverse", git config color.diff.newMoved "green reverse", git diff --cached --color-moved=plain
 
+```shell
+$ git config color.diff.oldMoved "red reverse" 
+$ git config color.diff.newMoved "green reverse"
+$ git diff --cached --color-moved=plain
+```
 #### Find piece of code which was once part of repo but not now
 ```
 git rev-list --all | xargs git grep MDC | head
