@@ -1,5 +1,18 @@
 ## Becoming Good at command-line
 
+
+.left-column[
+  ## Session format
+]
+.right-column[
+
+- We will follow simple question( or problem) and its answer (or solution)
+
+- While this might sound like particular use-case but we can eventually expand solutions for many other use-cases
+
+.footnote[.red[*] Feel free to interrupt any time you have better suggestion/idea ]
+]
+
 ### Session format
 
 * We will follow simple question( or problem) and its answer (or solution)
