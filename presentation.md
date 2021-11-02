@@ -81,9 +81,9 @@ date -d '+ 3 days'
 #### Reviewing refactoring changes in a snap
 
 * Highlight moved code
-![image](/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png)
+![image](https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png)
 
-![image](/uploads/14e633a9de454fadf3dd675138805fef/image.png)
+![image](https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png)
 
 git config color.diff.oldMoved "red reverse", git config color.diff.newMoved "green reverse", git diff --cached --color-moved=plain
 
