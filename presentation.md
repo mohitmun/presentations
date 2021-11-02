@@ -55,6 +55,12 @@ grep -oP "Status: .{0,3}" logs/application.log
 ```
 * [Add more problems involving following args]  grep: -F, -w, -i, -v, -l, -A,B,C equivalent for chars
 
+#### Understanding session multiplexing
+
+* `tmux` or `screen` (also called multiplexers) can be used to create multiple new shell sessions inside single ssh session  
+* Other advantage is session persistance. should be used when running long running command or if you have patchy internet connection
+* [TODO - Add examples]
+
 #### Learning how to learn [This should be second last section]
 
 * Understand complex command args using explainshell.com
