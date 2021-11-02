@@ -300,4 +300,4 @@ $ jo id=543 name=Mohit
 
 
 ---
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/dfda55bf7504402118288937932869fa/image.png">
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/dfda55bf7504402118288937932869fa/image.png" width="750" >
