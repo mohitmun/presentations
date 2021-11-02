@@ -82,8 +82,8 @@ date -d '+ 3 days'
 
 * Highlight moved code
 
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="120" height="120">
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="120" height="120">
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="250" height="250">
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="250" height="250">
 
 
 ```shell
