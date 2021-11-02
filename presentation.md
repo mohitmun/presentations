@@ -34,7 +34,7 @@ ___
 
 Let's say you have certain zips files or logs files in directory. and you want to remove/grep/extract those files based on certain conditions
 
-* Extracting zips files whos name starts with `extractMe`
+#### Extracting zips files whos name starts with `extractMe`
 ```
 find .  -name "extractMe*.zip" -exec unzip {} \; 
 ```
@@ -44,11 +44,16 @@ or Using xargs
 # Notice \
 ```
 
-* creating backup of order_export*.csv files
+#### creating backup of order_export*.csv files
 ```
 ls order_export*.csv | xargs -Ifile echo  file "bkp_file"
 ```
 
+#### Finding duplicated files
+
+```
+find .  -type f -name '*' -not -path "./.git/*"   -print0 | xargs -0 md5sum | sort -k 1,1 | uniq --check-chars=32 --all-repeated=separate
+```
 ___
 
 ### Time
@@ -60,6 +65,13 @@ date -d '20 mins ago'
 date -d 'a week ago'
 date -d '+ 3 days'
 ```
+
+#### Running command with timeout
+
+* If you wish you end command within `N` seconds if it doesn't succeed then `timeout` command allows you to do so
+`timeout 2 sleep 10`
+
+#### 
 ___
 ### Git
 
@@ -77,13 +89,29 @@ git rev-list --all | xargs git grep MDC | head
 #### 
 ___
 
-### All things grep
+### Text processing
+
+#### All things grep
 
 * Grepping "Status: " and any 3 letters which comes after that  
 ```
 grep -oP "Status: .{0,3}" logs/application.log
 ```
 * [Add more problems involving following args]  grep: -F, -w, -i, -v, -l, -A,B,C equivalent for chars
+
+#### Awk one liners
+
+```
+seq 10 | awk '{sum+=$1}END {print sum}'
+seq 10 | awk '($1 % 2) == 1{sum+=$1}END {print sum}'
+seq 10 | awk '{sum+=$1}END {print sum/NR}' # AVG
+Seq 10 | awk "{print} /7/ {exit}"
+
+sed 's/unix/linux/' geekfile.txt
+```
+
+
+
 
 ___
 
@@ -116,10 +144,10 @@ ___
 
 ### Making life simpler and easier
 
-* `jq` - reading/parsing json
-
+* [`jq`](https://github.com/stedolan/jq) - reading/parsing json
 * [`jo`](https://github.com/jpmens/jo) - creating json 
-* `tig` - command line git repo browser
+* [`tig`](https://jonas.github.io/tig/) - command line git repo browser
+* [`diff-so-fancy`](https://github.com/so-fancy/diff-so-fancy) - Good-lookin' diffs
 
 ```
 curl -sSL http://localhost:8081/metrics | jq .version
