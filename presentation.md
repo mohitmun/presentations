@@ -42,6 +42,11 @@ or Using xargs
 # Notice \
 ```
 
+* creating backup of order_export*.csv files
+```
+ls order_export*.csv | xargs -Ifile echo  file "bkp_file"
+```
+
 #### Reviewing refactoring changes in a snap
 
 * [Add technique mentioned here] https://gitlab.com/O1Dev/O1Server/-/merge_requests/7065#note_653530489
@@ -73,6 +78,19 @@ grep -oP "Status: .{0,3}" logs/application.log
 * Ctrl + u = delete leftwards until the beginning of line
 * Ctrl + k - kill to end of the line
 * Ctrl + l - clear the screen.
+
+#### Making life simpler and easier
+
+* `jq` - reading/parsing json
+
+* [`jo`](https://github.com/jpmens/jo) - creating json 
+* `tig` - command line git repo browser
+
+```
+curl -sSL http://localhost:8081/metrics | jq .version
+jo id=543 name=Mohit
+```
+
 
 #### Learning how to learn [This should be second last section]
 
