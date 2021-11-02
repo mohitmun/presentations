@@ -51,11 +51,30 @@ ls order_export*.csv | xargs -Ifile echo  file "bkp_file"
 
 ___
 
-### Reviewing refactoring changes in a snap
+### Time
 
-* [Add technique mentioned here] https://gitlab.com/O1Dev/O1Server/-/merge_requests/7065#note_653530489
+#### date command recognises simple text
+
+```
+date -d '20 mins ago'
+date -d 'a week ago'
+date -d '+ 3 days'
+```
+___
+### Git
+
+#### Reviewing refactoring changes in a snap
+
+* [TODO Add technique mentioned here] https://gitlab.com/O1Dev/O1Server/-/merge_requests/7065#note_653530489
 * https://gitlab.com/O1Dev/O1Server/uploads/2b6531588c9e3745e761e1938035b254/image.png
+git config color.diff.oldMoved "red reverse", git config color.diff.newMoved "green reverse", git diff --cached --color-moved=plain
 
+#### Find piece of code which was once part of repo but not now
+```
+git rev-list --all | xargs git grep MDC | head
+```
+
+#### 
 ___
 
 ### All things grep
@@ -75,8 +94,7 @@ ___
 * Other advantage is session persistance. should be used when running long running command or if you have patchy internet connection
 * Use `Ctrl+z` to suspend process/command and then use `fg/bg` command to run same suspended process in background or foreground
 * `tmux` also have option `-CC` which is integration mode with iterm2
-
-* [TODO - Add examples]
+* `tee` can be used to redirect output to file as well as stdout
 
 ___
 
@@ -107,7 +125,7 @@ ___
 curl -sSL http://localhost:8081/metrics | jq .version
 jo id=543 name=Mohit
 ```
-
+* Working with multiple branches ? Tired of `git stash/stash  pop ` ?  `git worktree` to the rescue
 
 ___
 
@@ -137,3 +155,4 @@ ___
 * https://github.com/dylanaraps/pure-bash-bible 
 * https://news.ycombinator.com/item?id=14634964 
 * https://tldp.org/LDP/abs/html/sedawk.html 
+* https://www.tldp.org/LDP/abs/html/contributed-scripts.html
