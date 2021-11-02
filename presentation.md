@@ -1,7 +1,6 @@
 ## Becoming Good at command-line
 
 
-
 ### Session format
 
 * We will follow simple question( or problem) and its answer (or solution)
@@ -9,14 +8,83 @@
 
 ---
 
-### Measuring server response time
+
+### How do I monitor resources on server?
+
+* RAM: `free`
+* Filesystem: `ls`
+* Network: `netstat, lsof `
+* CPU: `top`
+* Processes: `ps`
+* Everything: `htop`
+* IO: `iostat`
+* Disk space usage: `du ( -a, -h, -s (summarize)`
+
+---
+### Keyboard shortcuts
+
+* Keybindings - (vim/emacs)
+* Ctrl + a - move cursor to start of line
+* Ctrl + e - move cursor to end of line
+* Ctrl + w - delete one word
+* option + left arrow/right arrow - move one word left/right
+* Ctrl + u = delete leftwards until the beginning of line
+* Ctrl + k - kill to end of the line
+* Ctrl + l - clear the screen.
+
+---
 
 
+### Time
 
-* When you don’t have access to server, using [curl timings](https://blog.cloudflare.com/a-question-of-timing/): 
+#### Date command recognises simple text
+
 ```shell
-$ curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
+$ date -d '20 mins ago'
+$ date -d 'a week ago'
+$ date -d '+ 3 days'
 ```
+
+#### Running command with `timeout`
+
+* If you wish you end command within `N` seconds if it doesn't succeed then `timeout` command allows you to do so
+
+
+```shell
+$ timeout 2 sleep 10
+```
+
+---
+### Git
+
+#### Reviewing refactoring changes in a snap
+
+* Highlight moved code
+
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="250" height="250">
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="250" height="250">
+
+
+```shell
+$ git config color.diff.oldMoved "red reverse" 
+$ git config color.diff.newMoved "green reverse"
+$ git diff --cached --color-moved=plain
+```
+#### Find piece of code which was once part of repo but not now
+```shell
+$ git rev-list --all | xargs git grep MDC | head
+```
+
+---
+
+### Measuring server response time when you don’t have access to server, using [curl timings](https://blog.cloudflare.com/a-question-of-timing/): 
+
+```shell
+$ curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET \ 
+-w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
+```
+
+---
 
 ### Finding http errors and it's count
 
@@ -39,7 +107,7 @@ or Using xargs
 $ \ls extractMe*.zip | xargs unzip 
 # Notice \
 ```
-
+---
 #### How to remove files of a given type in a given location which are older than 1 day:
 
 ```shell
@@ -59,45 +127,6 @@ $ find .  -type f -name '*' -not -path "./.git/*"   -print0 | xargs -0 md5sum | 
 ```
 ---
 
-### Time
-
-#### date command recognises simple text
-
-```shell
-$ date -d '20 mins ago'
-$ date -d 'a week ago'
-$ date -d '+ 3 days'
-```
-
-#### Running command with timeout
-
-* If you wish you end command within `N` seconds if it doesn't succeed then `timeout` command allows you to do so
-`timeout 2 sleep 10`
-
-#### 
----
-### Git
-
-#### Reviewing refactoring changes in a snap
-
-* Highlight moved code
-
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="250" height="250">
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="250" height="250">
-
-
-```shell
-$ git config color.diff.oldMoved "red reverse" 
-$ git config color.diff.newMoved "green reverse"
-$ git diff --cached --color-moved=plain
-```
-#### Find piece of code which was once part of repo but not now
-```shell
-$ git rev-list --all | xargs git grep MDC | head
-```
-
-#### 
----
 
 ### Text processing
 
@@ -138,7 +167,7 @@ $ sed 's/unix/linux/' geekfile.txt
 ### Extract anything (and how to create bash functions)
 
 ```shell
-extract () {
+$ extract () {
   if [ -f $1 ]; then
     case $1 in
       *.tar.bz2)   tar xvjf $1    ;;
@@ -148,23 +177,26 @@ extract () {
       *.rar)       unrar x $1     ;;
       *.gz)        gunzip $1      ;;
       *.tar)       tar xvf $1     ;;
-      *.tbz2)      tar xvjf $1    ;;
       *.tgz)       tar xvzf $1    ;;
       *.zip)       unzip $1       ;;
       *.Z)         uncompress $1  ;;
       *.7z)        7z x $1        ;;
       *.xz)        unxz $1        ;;
-      *.exe)       cabextract $1  ;;
-      *.ace)       unace $1       ;;
-      *.arj)       unarj $1       ;;
       *)           echo "'$1': unrecognized file compression" ;;
     esac
   else
     echo "'$1' is not a valid file"
   fi
 }
+
 ```
 
+#### Once a bash function is defined how can I retrive it's defination?
+
+```shell
+$ type extract
+$ which extract
+```
 ---
 
 
@@ -175,21 +207,6 @@ extract () {
 * Use `Ctrl+z` to suspend process/command and then use `fg/bg` command to run same suspended process in background or foreground
 * `tmux` also have option `-CC` which is integration mode with iterm2
 * `tee` can be used to redirect output to file as well as stdout
-
----
-
-
-### Keyboard shortcuts
-
-* Keybindings - (vim/emacs)
-* Alt + b, Alt + f - move forward/backward by word
-* Ctrl + a - move cursor to start of line
-* Ctrl + e - move cursor to end of line
-* Ctrl + w - delete one word
-* option + left arrow/right arrow - move one work left/right
-* Ctrl + u = delete leftwards until the beginning of line
-* Ctrl + k - kill to end of the line
-* Ctrl + l - clear the screen.
 
 ---
 
@@ -210,7 +227,7 @@ $ jo id=543 name=Mohit
 ---
 
 
-### Learning how to learn [This should be second last section]
+### Learning how to learn
 
 * Understand complex command args using explainshell.com
 * Learn to read manuals (`man man`)
