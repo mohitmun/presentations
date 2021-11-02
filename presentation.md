@@ -202,8 +202,8 @@ extract () {
 * [`diff-so-fancy`](https://github.com/so-fancy/diff-so-fancy) - Good-lookin' diffs
 
 ```shell
-curl -sSL http://localhost:8081/metrics | jq .version
-jo id=543 name=Mohit
+$ curl -sSL http://localhost:8081/metrics | jq .version
+$ jo id=543 name=Mohit
 ```
 * Working with multiple branches ? Tired of `git stash/stash  pop ` ?  `git worktree` to the rescue
 
