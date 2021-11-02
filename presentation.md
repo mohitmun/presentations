@@ -5,16 +5,6 @@
 * We will follow simple question( or problem) and its answer (or solution)
 * While this might sound like particular use-case but we can eventually expand solutions for many other use-cases
 
-### How do I monitor resources on server?
-
-* RAM: `free`
-* Filesystem: `ls/du`
-* Network: `netstat, lsof `
-* CPU: `iostat, top`
-* Processes: `ps`
-* Everything: `htop`
-* Disk space usage: `du ( -a, -h, -s (summarize)`
-
 ---
 
 ### Measuring server response time
