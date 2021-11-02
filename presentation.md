@@ -41,8 +41,13 @@
 
 ```shell
 $ date -d '20 mins ago'
+Wed Nov  3 00:13:16 IST 2021
+
 $ date -d 'a week ago'
+Wed Oct 27 05:03:27 IST 2021
+
 $ date -d '+ 3 days'
+Sat Nov  6 00:33:31 IST 2021
 ```
 
 #### Running command with `timeout`
@@ -64,14 +69,22 @@ $ git config color.diff.oldMoved "red reverse"
 $ git config color.diff.newMoved "green reverse"
 $ git diff --cached --color-moved=plain
 ```
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="300" height="300">
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="300" height="300">
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="350" height="350">
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="350" height="350">
 
 ---
 
 #### Find piece of code which was once part of repo but not now
 ```shell
 $ git rev-list --all | xargs git grep MDC | head
+b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-consumer/src/main/java/com/o1server/consumer/service/kafka/SimpleKafkaConsumer.java:import org.slf4j.MDC;
+b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-consumer/src/main/java/com/o1server/consumer/service/kafka/SimpleKafkaConsumer.java:            MDC.put("requestId", new String(header.value(), StandardCharsets.UTF_8));
+b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/database/feed/producer/ChangeDataProducer.java:import org.slf4j.MDC;
+b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/database/feed/producer/ChangeDataProducer.java:        String requestId = MDC.get("requestId");
+b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/server/logic/ObjectPermissions.java:import org.slf4j.MDC;
+b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/server/logic/ObjectPermissions.java:                MDC.get(
+b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/server/logic/ObjectPermissions.java:                            MDC.get(
+
 ```
 
 ---
@@ -81,13 +94,31 @@ $ git rev-list --all | xargs git grep MDC | head
 ```shell
 $ curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET \ 
 -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
+TTFB: 0.435743 Total time: 0.435918
+
 ```
 
 
 ### Finding http errors and it's count
 
+Let's say our nginx log format looks like this
+
+```
+127.0.0.1 - - [02/Nov/2021:06:00:10 +0000] [-] "GET /nginx_status HTTP/1.1" 200 113 0.000 - - "-" "localhost:65432" "-" "Go-http-client/1.1" "-" "-" "-" "2" "-", "-" "" "127.0.0.1"
+```
+
 ```shell
-$ awk '{print $9}' /var/log/nginx/access.log |  head -n 1000 | sort | uniq -c | sort -rn
+$ awk '{print $10}' /var/log/nginx/access.log |  head -n 1000 | sort | uniq -c | sort -rn
+    844 200
+     51 304
+     44 201
+     35 302
+     11 502
+      5 500
+      3 404
+      3 400
+      3 301
+      1 499
 ```
 
 ---
