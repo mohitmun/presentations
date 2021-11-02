@@ -57,19 +57,18 @@ $ timeout 2 sleep 10
 ---
 ### Git
 
-#### Reviewing refactoring changes in a snap
-
-* Highlight moved code
-
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="250" height="250">
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="250" height="250">
-
+#### Reviewing refactoring changes in a snap, Highlight moved code
 
 ```shell
 $ git config color.diff.oldMoved "red reverse" 
 $ git config color.diff.newMoved "green reverse"
 $ git diff --cached --color-moved=plain
 ```
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="300" height="300">
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="300" height="300">
+
+---
+
 #### Find piece of code which was once part of repo but not now
 ```shell
 $ git rev-list --all | xargs git grep MDC | head
@@ -84,7 +83,6 @@ $ curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GE
 -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
 ```
 
----
 
 ### Finding http errors and it's count
 
@@ -153,6 +151,7 @@ $ zgrep -F $'53fa29f3-1e64-4f48-a234-3f7dba388897\n801a3303-f25d-4bb9-afdf-48b59
 * Other grep options   
 `-w`: matches words, `-i`: ignore case, `-v`: invert match, `-l`: list only files, `-A,B,C`: context around matches
 
+---
 #### Awk one liners
 
 ```shell
@@ -220,7 +219,10 @@ $ which extract
 
 ```shell
 $ curl -sSL http://localhost:8081/metrics | jq .version
+
+
 $ jo id=543 name=Mohit
+{"id":543,"name":"Mohit"}
 ```
 * Working with multiple branches ? Tired of `git stash/stash  pop ` ?  `git worktree` to the rescue
 
@@ -253,3 +255,7 @@ $ jo id=543 name=Mohit
 * https://news.ycombinator.com/item?id=14634964 
 * https://tldp.org/LDP/abs/html/sedawk.html 
 * https://www.tldp.org/LDP/abs/html/contributed-scripts.html
+
+
+---
+<img src="https://gitlab.com/O1Dev/O1Server/uploads/dfda55bf7504402118288937932869fa/image.png">
