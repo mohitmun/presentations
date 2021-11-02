@@ -55,10 +55,11 @@ grep -oP "Status: .{0,3}" logs/application.log
 ```
 * [Add more problems involving following args]  grep: -F, -w, -i, -v, -l, -A,B,C equivalent for chars
 
-#### Understanding session multiplexing
+#### Dealing with long running commands/processes
 
 * `tmux` or `screen` (also called multiplexers) can be used to create multiple new shell sessions inside single ssh session  
 * Other advantage is session persistance. should be used when running long running command or if you have patchy internet connection
+* Use `Ctrl+z` to suspend process/command and then use `fg/bg` command to run same suspended process in background or foreground
 * [TODO - Add examples]
 
 #### Keyboard shortcuts
