@@ -15,6 +15,7 @@
 * Everything: `htop`
 * Disk space usage: `du ( -a, -h, -s (summarize)`
 
+___
 
 #### Measuring server response time
 
@@ -27,6 +28,7 @@ awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c
 ```
 curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
 ```
+___
 
 #### Executing commands based on output of other command
 
@@ -47,10 +49,14 @@ or Using xargs
 ls order_export*.csv | xargs -Ifile echo  file "bkp_file"
 ```
 
+___
+
 #### Reviewing refactoring changes in a snap
 
 * [Add technique mentioned here] https://gitlab.com/O1Dev/O1Server/-/merge_requests/7065#note_653530489
 * https://gitlab.com/O1Dev/O1Server/uploads/2b6531588c9e3745e761e1938035b254/image.png
+
+___
 
 #### All things grep
 
@@ -60,12 +66,18 @@ grep -oP "Status: .{0,3}" logs/application.log
 ```
 * [Add more problems involving following args]  grep: -F, -w, -i, -v, -l, -A,B,C equivalent for chars
 
+___
+
+
 #### Dealing with long running commands/processes
 
 * `tmux` or `screen` (also called multiplexers) can be used to create multiple new shell sessions inside single ssh session  
 * Other advantage is session persistance. should be used when running long running command or if you have patchy internet connection
 * Use `Ctrl+z` to suspend process/command and then use `fg/bg` command to run same suspended process in background or foreground
 * [TODO - Add examples]
+
+___
+
 
 #### Keyboard shortcuts
 
@@ -78,6 +90,9 @@ grep -oP "Status: .{0,3}" logs/application.log
 * Ctrl + u = delete leftwards until the beginning of line
 * Ctrl + k - kill to end of the line
 * Ctrl + l - clear the screen.
+
+___
+
 
 #### Making life simpler and easier
 
@@ -92,13 +107,22 @@ jo id=543 name=Mohit
 ```
 
 
+___
+
+
 #### Learning how to learn [This should be second last section]
 
 * Understand complex command args using explainshell.com
 * Learn to read manuals (man man)
 * Commands (Identify by which, type)
 
+___
+
+
 #### QnA
+
+___
+
 
 #### Resources
 
