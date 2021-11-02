@@ -115,9 +115,35 @@ Seq 10 | awk "{print} /7/ {exit}"
 sed 's/unix/linux/' geekfile.txt
 ```
 
+### Extract anything (and how to create bash functions)
 
-
-
+```
+extract () {
+  if [ -f $1 ]; then
+    case $1 in
+      *.tar.bz2)   tar xvjf $1    ;;
+      *.tar.gz)    tar xvzf $1    ;;
+      *.tar.xz)    tar xvJf $1    ;;
+      *.bz2)       bunzip2 $1     ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1      ;;
+      *.tar)       tar xvf $1     ;;
+      *.tbz2)      tar xvjf $1    ;;
+      *.tgz)       tar xvzf $1    ;;
+      *.zip)       unzip $1       ;;
+      *.Z)         uncompress $1  ;;
+      *.7z)        7z x $1        ;;
+      *.xz)        unxz $1        ;;
+      *.exe)       cabextract $1  ;;
+      *.ace)       unace $1       ;;
+      *.arj)       unarj $1       ;;
+      *)           echo "'$1': unrecognized file compression" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+```
 ---
 
 
@@ -166,8 +192,8 @@ jo id=543 name=Mohit
 ### Learning how to learn [This should be second last section]
 
 * Understand complex command args using explainshell.com
-* Learn to read manuals (man man)
-* Commands (Identify by which, type)
+* Learn to read manuals (`man man`)
+* Commands (Identify by `which`, `type`)
 
 ---
 
