@@ -18,6 +18,13 @@ awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c
 ```
 curl 'https://www.shop101.com/O1Server/saas/shippers/shippingPrices/all' -X GET -w "TTFB: %{time_starttransfer} Total time: %{time_total} \n" -o /dev/null
 ```
+
+### Finding http errors and it's count
+
+```
+awk '{print $1}' /var/log/nginx/access.log | sort | uniq -c
+```
+
 ---
 
 ### Executing commands based on output of other command
@@ -32,6 +39,12 @@ or Using xargs
 ```
 \ls extractMe*.zip | xargs unzip 
 # Notice \
+```
+
+#### How to remove files of a given type in a given location which are older than 1 day:
+
+```shell
+$ find /tmp/excels/ShippingManifests/ -type f -name '*.pdf' -mtime +1 -exec rm {} \
 ```
 
 #### creating backup of order_export*.csv files
@@ -67,8 +80,11 @@ date -d '+ 3 days'
 
 #### Reviewing refactoring changes in a snap
 
-* [TODO Add technique mentioned here] https://gitlab.com/O1Dev/O1Server/-/merge_requests/7065#note_653530489
-* https://gitlab.com/O1Dev/O1Server/uploads/2b6531588c9e3745e761e1938035b254/image.png
+* Highlight moved code
+![image](/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png)
+
+![image](/uploads/14e633a9de454fadf3dd675138805fef/image.png)
+
 git config color.diff.oldMoved "red reverse", git config color.diff.newMoved "green reverse", git diff --cached --color-moved=plain
 
 #### Find piece of code which was once part of repo but not now
@@ -144,6 +160,7 @@ extract () {
   fi
 }
 ```
+
 ---
 
 
