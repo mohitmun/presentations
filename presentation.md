@@ -187,11 +187,19 @@ $ zgrep -F $'53fa29f3-1e64-4f48-a234-3f7dba388897\n801a3303-f25d-4bb9-afdf-48b59
 
 ```shell
 $ seq 10 | awk '{sum+=$1}END {print sum}'
-$ seq 10 | awk '($1 % 2) == 1{sum+=$1}END {print sum}'
-$ seq 10 | awk '{sum+=$1}END {print sum/NR}' # AVG
-$ Seq 10 | awk "{print} /7/ {exit}"
+55
 
-$ sed 's/unix/linux/' geekfile.txt
+$ seq 10 | awk '($1 % 2) == 1{sum+=$1}END {print sum}'
+25
+
+$ seq 10 | awk '{sum+=$1}END {print sum/NR}' # AVG
+5.5
+
+$ echo "aa 10
+        bb 20
+        cc 30" | awk '/bb/ { print $2 }'
+20
+
 ```
 
 ### Extract anything (and how to create bash functions)
@@ -225,7 +233,10 @@ $ extract () {
 
 ```shell
 $ type extract
+extract is a shell function from /Users/mohitmunjani/.zshrc
+
 $ which extract
+[prints previous method defination]
 ```
 ---
 
@@ -250,7 +261,7 @@ $ which extract
 
 ```shell
 $ curl -sSL http://localhost:8081/metrics | jq .version
-
+"4.0.0"
 
 $ jo id=543 name=Mohit
 {"id":543,"name":"Mohit"}
