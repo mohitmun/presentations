@@ -61,6 +61,18 @@ grep -oP "Status: .{0,3}" logs/application.log
 * Other advantage is session persistance. should be used when running long running command or if you have patchy internet connection
 * [TODO - Add examples]
 
+#### Keyboard shortcuts
+
+* Keybindings - (vim/emacs)
+* Alt + b, Alt + f - move forward/backward by word
+* Ctrl + a - move cursor to start of line
+* Ctrl + e - move cursor to end of line
+* Ctrl + w - delete one word
+* option + left arrow/right arrow - move one work left/right
+* Ctrl + u = delete leftwards until the beginning of line
+* Ctrl + k - kill to end of the line
+* Ctrl + l - clear the screen.
+
 #### Learning how to learn [This should be second last section]
 
 * Understand complex command args using explainshell.com
