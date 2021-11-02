@@ -74,6 +74,8 @@ ___
 * `tmux` or `screen` (also called multiplexers) can be used to create multiple new shell sessions inside single ssh session  
 * Other advantage is session persistance. should be used when running long running command or if you have patchy internet connection
 * Use `Ctrl+z` to suspend process/command and then use `fg/bg` command to run same suspended process in background or foreground
+* `tmux` also have option `-CC` which is integration mode with iterm2
+
 * [TODO - Add examples]
 
 ___
