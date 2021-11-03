@@ -188,7 +188,7 @@ $ extract () {
 }
 
 ```
-
+---
 #### Once a bash function is defined how can I retrive it's defination?
 
 ```shell
