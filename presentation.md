@@ -19,7 +19,7 @@
 * Ctrl + u = delete leftwards until the beginning of line
 * Ctrl + k - kill to end of the line
 * Ctrl + l - clear the screen.
-
+* CTRL - _ - Undo whatever was just inputted 
 ---
 
 
