@@ -206,9 +206,33 @@ $ which extract
 * `tmux` or `screen` (also called multiplexers) can be used to create multiple new shell sessions inside single ssh session  
 * Other advantage is session persistance. should be used when running long running command or if you have patchy internet connection
 * Use `Ctrl+z` to suspend process/command and then use `fg/bg` command to run same suspended process in background or foreground
+
+
 * `tmux` also have option `-CC` which is integration mode with iterm2
+---
 * `tee` can be used to redirect output to file as well as stdout
 
+```shell
+$ echo "Visible in strout and file" | tee echoData
+Visible in strout and file
+
+$ cat echoData
+Visible in strout and file
+
+$ echo "Again Visible in strout and file" | tee echoData
+Again Visible in strout and file
+
+$ cat echoData
+Again Visible in strout and file
+
+$ echo "Now data will be appended" | tee -a echoData
+Now data will be appended
+
+$ cat echoData
+Again Visible in strout and file
+Now data will be appended
+
+```
 ---
 
 
