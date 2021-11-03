@@ -6,24 +6,12 @@
 * We will follow simple question( or problem) and its answer (or solution)
 * While this might sound like particular use-case but we can eventually expand solutions for many other use-cases
 
----
-
-
-### How do I monitor resources on server?
-
-* RAM: `free`
-* Filesystem: `ls`
-* Network: `netstat, lsof `
-* CPU: `top`
-* Processes: `ps`
-* Everything: `htop`
-* IO: `iostat`
-* Disk space usage: `du ( -a, -h, -s (summarize)`
 
 ---
 ### Keyboard shortcuts
 
 * Keybindings - (vim/emacs)
+* Default Keybindings are emacs. switch to vi using `set -o vi`
 * Ctrl + a - move cursor to start of line
 * Ctrl + e - move cursor to end of line
 * Ctrl + w - delete one word
@@ -57,34 +45,6 @@ Sat Nov  6 00:33:31 IST 2021
 
 ```shell
 $ timeout 2 sleep 10
-```
-
----
-### Git
-
-#### Reviewing refactoring changes in a snap, Highlight moved code
-
-```shell
-$ git config color.diff.oldMoved "red reverse" 
-$ git config color.diff.newMoved "green reverse"
-$ git diff --cached --color-moved=plain
-```
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/1aac60fa2d1bf0ccb75b594b88f122f7/image.png" width="350" height="350">
-<img src="https://gitlab.com/O1Dev/O1Server/uploads/14e633a9de454fadf3dd675138805fef/image.png" width="350" height="350">
-
----
-
-#### Find piece of code which was once part of repo but not now
-```shell
-$ git rev-list --all | xargs git grep MDC | head
-b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-consumer/src/main/java/com/o1server/consumer/service/kafka/SimpleKafkaConsumer.java:import org.slf4j.MDC;
-b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-consumer/src/main/java/com/o1server/consumer/service/kafka/SimpleKafkaConsumer.java:            MDC.put("requestId", new String(header.value(), StandardCharsets.UTF_8));
-b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/database/feed/producer/ChangeDataProducer.java:import org.slf4j.MDC;
-b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/database/feed/producer/ChangeDataProducer.java:        String requestId = MDC.get("requestId");
-b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/server/logic/ObjectPermissions.java:import org.slf4j.MDC;
-b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/server/logic/ObjectPermissions.java:                MDC.get(
-b7d5808af9c270224b9ae8922fae7629875b7d65:O1Server-db/src/main/java/com/o1server/server/logic/ObjectPermissions.java:                            MDC.get(
-
 ```
 
 ---
@@ -201,7 +161,7 @@ $ echo "aa 10
 20
 
 ```
-
+---
 ### Extract anything (and how to create bash functions)
 
 ```shell
@@ -287,7 +247,9 @@ $ jo id=543 name=Mohit
 
 ### Resources
 
+* Brilliant write up on history of tty - https://www.linusakesson.net/programming/tty/
 * Awesome way to learn command args - https://explainshell.com/
+* Amazing tutorial on awk - https://earthly.dev/blog/awk-examples/
 * https://github.com/jlevy/the-art-of-command-line
 * https://unix.stackexchange.com/questions/4023/aliases-vs-functions-vs-scripts 
 * https://github.com/learnbyexample/Command-line-text-processing
